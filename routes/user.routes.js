@@ -3,7 +3,11 @@ module.exports = (app) => {
 
     const router = require('express').Router();
 
-    router.get('/signin', userController.signIn)
+    router.post('/signup', userController.signUp)
+
+    router.post('/signin', userController.signIn)
+
+    router.post('/signout', userController.signOut)
 
     app.use('/api', router);
 }
