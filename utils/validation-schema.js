@@ -1,7 +1,6 @@
 const userValidator = {
     rules: {
-        firstName: 'required',
-        lastName: 'required',
+        userName: 'required',
         gender: 'required',
         number: 'required',
         email: 'required|email',

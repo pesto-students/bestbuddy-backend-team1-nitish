@@ -83,7 +83,7 @@ exports.signIn = (req, res) => {
                                     res.status(200).send({
                                         status: true,
                                         message: "Loggedin successfully!",
-                                        token
+                                        token,
                                     })
                                 })
 
