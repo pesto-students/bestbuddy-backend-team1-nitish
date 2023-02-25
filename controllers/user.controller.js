@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 const db = require('../models/index');
 const users = db.users;
 const validator = require('../middleware/validation-middleware');
-const { userValidator, loginValidator } = require('../utils/validation-schema')
+const { userValidator, loginValidator } = require('../utils/validation-schema');
+
 
 exports.signUp = (req, res) => {
     try {
@@ -142,6 +143,46 @@ exports.signOut = (req, res) => {
 
     }
     catch (err) {
+        res.status(500).send({
+            status: false,
+            message: "Internal server error, Please try again later!",
+        })
+    }
+}
+
+exports.getUserDetails = (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email) return res.status(401).send({ message: 'access denied' });
+        const match = { $match: { 'email': email } };
+        const lookup = {
+            $lookup: {
+                from: "properties",
+                localField: "_id",
+                foreignField: "user_id",
+                as: "propertyDetails"
+            }
+        };
+        const stage = [match, lookup];
+        users.aggregate(stage)
+            .then((data) => {
+                const userInfo = {
+                    id: data[0]._id,
+                    name: data[0].userName,
+                    gender: data[0].gender,
+                    number: data[0].number,
+                    email: data[0].email,
+                    property: data[0].propertyDetails
+                }
+
+                res.status(200).send({
+                    status: true,
+                    data: userInfo
+                })
+            })
+    }
+    catch (err) {
+        console.log(err)
         res.status(500).send({
             status: false,
             message: "Internal server error, Please try again later!",
