@@ -1,9 +1,9 @@
 module.exports = (mongoose) => {
-    const property = mongoose.model(
-        'property',
+    const properties = mongoose.model(
+        'properties',
         mongoose.Schema(
             {
-                user_id: { type: String, required: true },
+                user_id: { type: mongoose.Schema.Types.ObjectId, required: true },
                 user_name: { type: String, required: true },
                 name: { type: String, required: true },
                 city: { type: String, required: true },
@@ -22,5 +22,5 @@ module.exports = (mongoose) => {
         )
     )
 
-    return property;
+    return properties;
 }
