@@ -7,5 +7,6 @@ db.mongoose = mongoose
 db.url = config.url;
 
 db.users = require('./user.model')(mongoose);
+db.property = require('./property.model')(mongoose);
 
 module.exports = db;
