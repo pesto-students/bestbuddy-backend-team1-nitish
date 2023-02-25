@@ -17,4 +17,21 @@ const loginValidator = {
     customError: {}
 }
 
-module.exports = { userValidator, loginValidator }
+const addPropertyValidator = {
+    rules: {
+        name: 'required',
+        city: 'required',
+        phone: 'required',
+        rent: 'required',
+        gender: 'required',
+        category: 'required',
+        availableDate: 'required',
+        typeOfShare: 'required',
+        amenties: 'required',
+        perfrences: 'required',
+        image: 'required'
+    },
+    customError: {}
+}
+
+module.exports = { userValidator, loginValidator, addPropertyValidator }

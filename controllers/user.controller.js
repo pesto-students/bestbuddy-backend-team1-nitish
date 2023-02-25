@@ -77,7 +77,7 @@ exports.signIn = (req, res) => {
                                 return;
                             }
 
-                            const token = jwt.sign({ email: req.body.email }, process.env.PRIVATEKEY);
+                            const token = jwt.sign({ id: user._id, name: user.userName, email: req.body.email }, process.env.PRIVATEKEY);
                             users.updateOne({ email: req.body.email }, { $set: { token, isLoggedIn: true } })
                                 .then(() => {
                                     res.status(200).send({
@@ -90,7 +90,7 @@ exports.signIn = (req, res) => {
                         } else {
                             res.status(404).send({
                                 status: false,
-                                message: "Email is not exist.",
+                                message: "Email doesn't exist.",
                             })
                         }
                     })
