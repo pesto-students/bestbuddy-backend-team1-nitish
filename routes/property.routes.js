@@ -1,7 +1,6 @@
-const authorization = require('../middleware/authorization-middleware');
-
 module.exports = (app) => {
     const propertyController = require('../controllers/property.controller');
+    const authorization = require('../middleware/authorization-middleware');
 
     const router = require('express').Router();
 

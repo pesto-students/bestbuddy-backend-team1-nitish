@@ -5,10 +5,13 @@ const property = db.property;
 const validator = require('../middleware/validation-middleware');
 const { addPropertyValidator } = require('../utils/validation-schema');
 const { uploadImage } = require('../uploads/uploads');
+const { Types } = require('mongoose');
 
 exports.addProperty = async (req, res) => {
     try {
         validator(req.body, addPropertyValidator.rules, addPropertyValidator.customError, async (err, status) => {
+            const { ObjectId } = Types;
+
             if (!status) {
                 res.status(412).send({
                     success: false,
@@ -26,7 +29,7 @@ exports.addProperty = async (req, res) => {
                     imageUrlList.push(result);
                 }
 
-                req.body.user_id = decode.id;
+                req.body.user_id = ObjectId(decode.id);
                 req.body.user_name = decode.name;
                 req.body.image = imageUrlList;
 
