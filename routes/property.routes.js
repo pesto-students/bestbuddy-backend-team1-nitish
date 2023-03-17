@@ -12,5 +12,7 @@ module.exports = (app) => {
 
     router.get('/property-category/:category', authorization(), propertyController.getPropertyByCategory);
 
+    router.delete('/property-id/:id', authorization(), propertyController.deleteProperty);
+
     app.use('/api', router);
 }
