@@ -14,5 +14,5 @@ module.exports = (app) => {
 
     router.delete('/property-id/:id', authorization(), propertyController.deleteProperty);
 
-    app.use('/api', router);
+    app.use('/api', router); 
 }

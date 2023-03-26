@@ -43,6 +43,7 @@ app.get("/", (req, res) => {
 
 //user routes
 require('./routes/user.routes')(app);
+
 //property routes
 require('./routes/property.routes')(app);
 

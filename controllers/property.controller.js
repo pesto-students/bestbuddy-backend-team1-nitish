@@ -4,7 +4,7 @@ const db = require("../models/index");
 const property = db.property;
 const validator = require("../middleware/validation-middleware");
 const { addPropertyValidator } = require("../utils/validation-schema");
-const { uploadImage } = require("../uploads/uploads");
+// const { uploadImage } = require("../uploads/uploads");
 const { Types } = require("mongoose");
 
 exports.addProperty = async (req, res) => {
@@ -28,17 +28,17 @@ exports.addProperty = async (req, res) => {
           );
 
           //upload the local image to cloundinary.
-          const image = req.body.image;
-          var imageUrlList = [];
-          for (var i = 0; i < image.length; i++) {
-            var locaFilePath = image[i];
-            var result = await uploadImage(locaFilePath);
-            imageUrlList.push(result);
-          }
+          // const image = req.body.image;
+          // var imageUrlList = [];
+          // for (var i = 0; i < image.length; i++) {
+          //   var locaFilePath = image[i];
+          //   var result = await uploadImage(locaFilePath);
+          //   imageUrlList.push(result);
+          // }
 
           req.body.user_id = ObjectId(decode.id);
           req.body.user_name = decode.name;
-          req.body.image = imageUrlList;
+          // req.body.image = imageUrlList;
 
           const newProperty = new property(req.body);
           newProperty
