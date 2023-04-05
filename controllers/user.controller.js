@@ -20,7 +20,7 @@ exports.signUp = (req, res) => {
                         if (user) {
                             res.status(400).send({
                                 success: false,
-                                message: 'Email is already exist.'
+                                message: 'Email already exists.'
                             })
                             return;
                         }
@@ -36,7 +36,7 @@ exports.signUp = (req, res) => {
                             .catch(() => {
                                 res.status(400).send({
                                     success: false,
-                                    message: 'Sorry, account is not created please try again.',
+                                    message: 'Sorry, account is not created, please try again.',
                                 })
                             })
 
@@ -44,7 +44,7 @@ exports.signUp = (req, res) => {
                     .catch(() => {
                         res.status(400).send({
                             success: false,
-                            message: 'Sorry, something went to wrong try again'
+                            message: 'Sorry, something went wrong! Please, try again!'
                         })
                     })
             }
@@ -53,7 +53,7 @@ exports.signUp = (req, res) => {
     catch (err) {
         res.status(500).send({
             status: false,
-            message: "Interal server error please agian later!"
+            message: "Interal server error, Please try again later!"
         })
     }
 }
@@ -73,7 +73,7 @@ exports.signIn = (req, res) => {
                             if (req.body.password !== user.password) {
                                 res.status(400).send({
                                     status: false,
-                                    message: "Password is incorrect.",
+                                    message: "Invalid credentials.",
                                 })
                                 return;
                             }
@@ -98,7 +98,7 @@ exports.signIn = (req, res) => {
                     .catch(() => {
                         res.status(400).send({
                             status: false,
-                            message: "Sorry, something went to wrong try again.",
+                            message: "Sorry, something went wrong, Please, try again!",
                         })
                     })
             }
