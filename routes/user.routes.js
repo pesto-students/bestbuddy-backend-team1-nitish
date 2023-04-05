@@ -10,7 +10,7 @@ module.exports = (app) => {
 
     router.post('/signout', userController.signOut)
 
-    router.post('/user-details', authorization(), userController.getUserDetails)
+    router.get('/user-details', authorization(), userController.getUserDetails)
 
     app.use('/api', router);
 }

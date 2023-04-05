@@ -111,7 +111,7 @@ exports.deleteProperty = (req, res) => {
     property.deleteOne({ _id: Id }).then(() => {
       res.status(200).send({
         status: true,
-        message: "Delete Successful",
+        message: "Property deleted successfully",
       });
     });
   } catch (err) {
