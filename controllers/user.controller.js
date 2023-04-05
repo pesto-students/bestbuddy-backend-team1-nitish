@@ -207,3 +207,19 @@ exports.getUserDetails = (req, res) => {
     });
   }
 };
+
+exports.editUserDetails = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const updated_user = await users.findByIdAndUpdate(_id, req.body, {
+      new: true,
+    });
+    return res.status(200).send({ status: true, data: updated_user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      status: false,
+      message: "Internal server error, Please try again later!",
+    });
+  }
+};
