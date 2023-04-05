@@ -12,5 +12,7 @@ module.exports = (app) => {
 
     router.get('/user-details', authorization(), userController.getUserDetails)
 
+    router.patch('/user-details/:id', authorization(), userController.editUserDetails);
+
     app.use('/api', router);
 }
