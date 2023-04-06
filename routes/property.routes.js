@@ -14,5 +14,7 @@ module.exports = (app) => {
 
     router.delete('/property-id/:id', authorization(), propertyController.deleteProperty);
 
+    router.patch('/edit-property/:id', authorization(), propertyController.editProperty);
+
     app.use('/api', router); 
 }
