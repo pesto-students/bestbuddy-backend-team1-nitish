@@ -121,3 +121,19 @@ exports.deleteProperty = (req, res) => {
     });
   }
 };
+
+exports.editProperty = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const updated_property = await property.findByIdAndUpdate(_id, req.body, {
+      new: true,
+    });
+    console.log(updated_property);
+    return res.status(200).send({ status: true, data: updated_property });
+  } catch (error) {
+    res.status(500).send({
+      status: false,
+      message: "Internal server error, Please try again later!",
+    });
+  }
+};
