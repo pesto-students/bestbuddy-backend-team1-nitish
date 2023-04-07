@@ -1,9 +1,12 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const PORT = process.env.PORT || 8000;
 const app = express();
+const googleAuthRoute = require('./routes/googleOauth');
+
 
 //env config
 require("dotenv").config();
@@ -46,5 +49,8 @@ require('./routes/user.routes')(app);
 
 //property routes
 require('./routes/property.routes')(app);
+
+//google oauth routes
+app.use('/api/googleAuth', googleAuthRoute);
 
 app.listen(PORT, () => console.log(`server is running on ${PORT}`));
