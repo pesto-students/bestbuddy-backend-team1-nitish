@@ -214,7 +214,6 @@ exports.editUserDetails = async (req, res) => {
     const updated_user = await users.findByIdAndUpdate(_id, req.body, {
       new: true,
     });
-    console.log(updated_user);
     return res.status(200).send({ status: true, data: updated_user });
   } catch (error) {
     console.log(error);
