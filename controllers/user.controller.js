@@ -192,6 +192,8 @@ exports.getUserDetails = (req, res) => {
         gender: data[0].gender,
         number: data[0].number,
         email: data[0].email,
+        city: data[0].city,
+        preferences: data[0].preferences,
         property: data[0].propertyDetails,
       };
       res.status(200).send({
