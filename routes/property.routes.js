@@ -21,7 +21,7 @@ module.exports = (app) => {
   );
 
   router.get(
-    "/property/city",
+    "/property/:city",
     authorization(),
     propertyController.getPropertyByCity
   );
