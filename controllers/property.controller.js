@@ -88,6 +88,23 @@ exports.getPropertyByCategory = (req, res) => {
   }
 };
 
+exports.getPropertyByCity = (req, res) => {
+  try {
+    const city = req.params.city;
+    property.find({ city: city }).then((data) => {
+      res.status(200).send({
+        status: true,
+        data,
+      });
+    });
+  } catch (err) {
+    res.status(500).send({
+      status: false,
+      message: "Internal server error, Please try again later!",
+    });
+  }
+};
+
 exports.getPropertyById = (req, res) => {
   try {
     const Id = req.params.id;
