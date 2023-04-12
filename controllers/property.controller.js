@@ -154,3 +154,28 @@ exports.editProperty = async (req, res) => {
     });
   }
 };
+
+exports.propertyFilters = async (req, res) => {
+  try {
+    const paramValues = await req.params;
+    const filterValues = {};
+
+    for (let [key, value] of Object.entries(paramValues)) {
+      if (value != undefined && value != "") {
+        filterValues[key] = value;
+      }
+    }
+
+    await property.find(filterValues).then((data) => {
+      res.status(200).send({
+        status: true,
+        data,
+      });
+    });
+  } catch (error) {
+    res.status(500).send({
+      status: false,
+      message: "Internal server error, Please try again later!",
+    });
+  }
+};

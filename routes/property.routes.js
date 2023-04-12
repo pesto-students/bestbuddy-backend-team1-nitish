@@ -38,5 +38,11 @@ module.exports = (app) => {
     propertyController.editProperty
   );
 
+  router.get(
+    "/property-filters/:city?/:rent?/:category?/:gender?",
+    authorization(),
+    propertyController.propertyFilters
+  );
+
   app.use("/api", router);
 };
