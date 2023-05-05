@@ -70,13 +70,10 @@ exports.getAllProperty = (req, res) => {
         match[filter] = query[filter];
       }
     }
-    console.log("match:", match);
-    console.log("sort_by:", sort_by);
     property
       .find(match)
       .sort({ rent: sort_by })
       .then((data) => {
-        console.log("data:", data);
         res.status(200).send({
           status: true,
           data,
