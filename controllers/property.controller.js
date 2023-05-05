@@ -57,7 +57,16 @@ exports.addProperty = async (req, res) => {
 
 exports.getAllProperty = (req, res) => {
   try {
-    property.find().then((data) => {
+    const { query } = req;
+    let filters = Object.keys(query);
+    let match = {};
+    if (filters?.length > 0) {
+      for (let filter of filters) {
+        match[filter] = query[filter];
+      }
+    }
+    
+    property.find(match).then((data) => {
       res.status(200).send({
         status: true,
         data,
