@@ -57,12 +57,28 @@ exports.addProperty = async (req, res) => {
 
 exports.getAllProperty = (req, res) => {
   try {
-    property.find().then((data) => {
-      res.status(200).send({
-        status: true,
-        data,
+    const { query } = req;
+    let filters = Object.keys(query);
+    let match = {};
+    let sort_by;
+    if (filters?.length > 0) {
+      for (let filter of filters) {
+        if (filter === "sort_by") {
+          sort_by = query[filter] === "desc" ? -1 : 1;
+          continue;
+        }
+        match[filter] = query[filter];
+      }
+    }
+    property
+      .find(match)
+      .sort({ rent: sort_by })
+      .then((data) => {
+        res.status(200).send({
+          status: true,
+          data,
+        });
       });
-    });
   } catch (err) {
     res.status(500).send({
       status: false,
