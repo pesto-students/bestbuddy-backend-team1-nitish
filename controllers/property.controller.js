@@ -60,25 +60,32 @@ exports.getAllProperty = (req, res) => {
     const { query } = req;
     let filters = Object.keys(query);
     let match = {};
-    let sort_by;
+    let rangeFilter = {};
     if (filters?.length > 0) {
       for (let filter of filters) {
-        if (filter === "sort_by") {
-          sort_by = query[filter] === "desc" ? -1 : 1;
+        if (filter === "max_price" || filter === "min_price") {
+          rangeFilter[filter] = parseInt(query[filter]);
           continue;
         }
         match[filter] = query[filter];
       }
     }
-    property
-      .find(match)
-      .sort({ rent: sort_by })
-      .then((data) => {
-        res.status(200).send({
-          status: true,
-          data,
-        });
+    if (rangeFilter.min_price || rangeFilter.max_price) {
+      match.rent = {};
+      if (rangeFilter.min_price) {
+        match.rent.$gte = rangeFilter.min_price;
+      }
+      if (rangeFilter.max_price) {
+        match.rent.$lte = rangeFilter.max_price;
+      }
+    }
+
+    property.find(match).then((data) => {
+      res.status(200).send({
+        status: true,
+        data,
       });
+    });
   } catch (err) {
     res.status(500).send({
       status: false,
