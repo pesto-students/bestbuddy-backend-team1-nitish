@@ -1,12 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const PORT = process.env.PORT || 8000;
 const app = express();
-
-//env config
-require("dotenv").config();
 
 //allow access for 3rd partywebsite.
 app.use(cors());
