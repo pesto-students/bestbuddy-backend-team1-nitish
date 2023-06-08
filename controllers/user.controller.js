@@ -195,6 +195,7 @@ exports.getUserDetails = (req, res) => {
         city: data[0].city,
         preferences: data[0].preferences,
         property: data[0].propertyDetails,
+        profile_pic: data[0].profile_pic,
       };
       res.status(200).send({
         status: true,
