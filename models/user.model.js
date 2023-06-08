@@ -12,6 +12,7 @@ module.exports = (mongoose) => {
         password: { type: String, required: true },
         isLoggedIn: { type: Boolean, required: true, default: false },
         token: { type: String, default: "" },
+        profile_pic: { type: String, required: true },
       },
       { timestamps: true }
     )
