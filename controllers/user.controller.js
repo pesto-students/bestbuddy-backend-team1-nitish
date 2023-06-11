@@ -181,7 +181,7 @@ exports.getUserDetails = (req, res) => {
       $lookup: {
         from: "properties",
         localField: "_id",
-        foreignField: "user_id",
+        foreignField: "user_details",
         as: "propertyDetails",
       },
     };
