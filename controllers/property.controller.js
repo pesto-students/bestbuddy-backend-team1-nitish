@@ -25,12 +25,10 @@ exports.addProperty = async (req, res) => {
             req.headers["access-token"],
             process.env.PRIVATEKEY
           );
-
-          req.body.user_id = ObjectId(decode.id);
-          req.body.user_name = decode.name;
+          req.body.user_details = decode.id;
 
           const newProperty = new property(req.body);
-          newProperty
+          await newProperty
             .save()
             .then(() => {
               res.status(201).send({
@@ -38,7 +36,7 @@ exports.addProperty = async (req, res) => {
                 message: "Successfully Added!",
               });
             })
-            .catch(() => {
+            .catch((err) => {
               res.status(400).send({
                 success: false,
                 message: "Sorry, Property is not added please try again later.",
@@ -128,14 +126,21 @@ exports.getPropertyByCity = (req, res) => {
   }
 };
 
-exports.getPropertyById = (req, res) => {
+exports.getPropertyById = async (req, res) => {
   try {
     const Id = req.params.id;
-    property.findOne({ _id: Id }).then((data) => {
-      res.status(200).send({
-        status: true,
-        data,
-      });
+    const property_data = await property
+      .findById({ _id: Id })
+      .populate(
+        "user_details",
+        "userName email number profile_pic gender city"
+      );
+    if (!property) {
+      return res.status(404).json({ message: "Property not found" });
+    }
+    res.status(200).send({
+      status: true,
+      property_data,
     });
   } catch (err) {
     res.status(500).send({
@@ -145,10 +150,10 @@ exports.getPropertyById = (req, res) => {
   }
 };
 
-exports.deleteProperty = (req, res) => {
+exports.deleteProperty = async (req, res) => {
   try {
     const Id = req.params.id;
-    property.deleteOne({ _id: Id }).then(() => {
+    await property.deleteOne({ _id: Id }).then(() => {
       res.status(200).send({
         status: true,
         message: "Property deleted successfully",
@@ -168,7 +173,6 @@ exports.editProperty = async (req, res) => {
     const updated_property = await property.findByIdAndUpdate(_id, req.body, {
       new: true,
     });
-    console.log(updated_property);
     return res.status(200).send({ status: true, data: updated_property });
   } catch (error) {
     res.status(500).send({

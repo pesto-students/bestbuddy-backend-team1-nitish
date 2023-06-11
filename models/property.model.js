@@ -3,8 +3,11 @@ module.exports = (mongoose) => {
     "properties",
     mongoose.Schema(
       {
-        user_id: { type: mongoose.Schema.Types.ObjectId, required: true },
-        user_name: { type: String, required: true },
+        user_details: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          ref: "users",
+        },
         name: { type: String, required: true },
         city: { type: String, required: true },
         phone: { type: Number, required: true },

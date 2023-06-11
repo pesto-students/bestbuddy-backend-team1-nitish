@@ -41,7 +41,8 @@ exports.signUp = (req, res) => {
                 .catch(() => {
                   res.status(400).send({
                     success: false,
-                    message: "Sorry, account creation failed, please try again.",
+                    message:
+                      "Sorry, account creation failed, please try again.",
                   });
                 });
             })
