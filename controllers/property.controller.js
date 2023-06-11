@@ -133,7 +133,7 @@ exports.getPropertyById = async (req, res) => {
       .findById({ _id: Id })
       .populate(
         "user_details",
-        "userName email number profile_pic gender city"
+        "userName email number profile_pic gender city age"
       );
     if (!property) {
       return res.status(404).json({ message: "Property not found" });

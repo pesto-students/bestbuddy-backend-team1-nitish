@@ -194,6 +194,7 @@ exports.getUserDetails = (req, res) => {
         number: data[0].number,
         email: data[0].email,
         city: data[0].city,
+        age: data[0].age,
         preferences: data[0].preferences,
         property: data[0].propertyDetails,
         profile_pic: data[0].profile_pic,

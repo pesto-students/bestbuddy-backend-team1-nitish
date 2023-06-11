@@ -6,6 +6,7 @@ module.exports = (mongoose) => {
         userName: { type: String, required: true },
         gender: { type: String, required: true },
         number: { type: Number, required: true },
+        age: { type: Number, required: true },
         email: { type: String, required: true },
         city: { type: String, required: true },
         preferences: { type: [String] },
