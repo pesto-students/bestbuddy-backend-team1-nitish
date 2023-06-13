@@ -33,7 +33,7 @@ module.exports = (app) => {
   );
 
   router.patch(
-    "/edit-property/:id",
+    "/edit_property/:id",
     authorization(),
     propertyController.editProperty
   );
