@@ -6,7 +6,7 @@ module.exports = (app) => {
 
   router.post("/addproperty", authorization(), propertyController.addProperty);
 
-  router.get("/property", authorization(), propertyController.getAllProperty);
+  router.get("/property", propertyController.getAllProperty);
 
   router.get(
     "/property-id/:id",
